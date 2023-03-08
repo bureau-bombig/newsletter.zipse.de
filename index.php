@@ -55,7 +55,14 @@ if (isset($_POST['email'])) {
     } else {
       $doiSubscriptionPage = '';
     }
-    $response = $contactsService->createContact($newContact, com_maileon_api_contacts_SynchronizationMode::$UPDATE, $doiSrc, $doiSubscriptionPage, true, true, 'ts1GM1iz');
+
+    $isDoiPlus = false;
+    // check if consent is given
+    if (isset($_POST['consent']) && $_POST['consent'] == 'on') {
+      $isDoiPlus = true;
+    }
+
+    $response = $contactsService->createContact($newContact, com_maileon_api_contacts_SynchronizationMode::$UPDATE, $doiSrc, $doiSubscriptionPage, true, $isDoiPlus, 'ts1GM1iz');
   }
 } else {
   $email = "";
@@ -83,14 +90,6 @@ if (isset($_POST['email'])) {
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-  <style>
-    .form-signin {
-      width: 100%;
-      max-width: 850px;
-      padding: 15px;
-      margin: 0 auto;
-    }
-  </style>
   <link rel="stylesheet" href="./style.css">
 </head>
 
@@ -125,47 +124,56 @@ if (isset($_POST['email'])) {
           <p class="form-text">Verpassen Sie nie wieder neue Produkte, Aktionen, Veranstaltungen und vieles mehr. <br>
             Wir halten Sie auf dem Laufenden! Das ganze bequem per E-Mail.</p>
         </div>
-        <div class="bb-form-row">
-          <div class="bb-form-item">
+        <div class="form-wrapper">
+          <div class="bb-form">
             <form id="api-data-form" class="form-signin" action="<?= $_SERVER['PHP_SELF'] ?>" method="post" accept-charset="utf-8" role="form">
-              <div class="form-group row">
-                <label class="col-form-label col-sm-3" for="email">Email: <span title="mandatory field">*</span></label>
-                <div class="col-sm-9">
-                  <input type="email" name="email" id="email" maxlength="255" placeholder="- Please enter email address -" value="<?= $email ?>" class="form-control" required>
-                </div>
+              <div class="bb-form-row">
+                <input type="email" name="email" id="email" maxlength="255" placeholder="E-Mail-Adresse*" value="<?= $email ?>" class="bb-input" required>
               </div>
 
-              <div class="form-group row">
-                <label class="col-form-label col-sm-3" for="standard_0">Anrede:</label>
-                <div class="col-sm-9"><input type="text" placeholder="Anrede" name="standard_0" id="standard_0" maxlength="255" value="<?= $standard_0 ?>" class="form-control"></div>
+              <div class="bb-form-row">
+                <!-- Original -->
+                <!-- <input type="text" placeholder="Anrede" name="standard_0" id="standard_0" maxlength="255" value="<?= "" //$standard_0 
+                                                                                                                      ?>" class="form-control"> -->
+
+                <select name="standard_0" id="standard_0" class="bb-input">
+                  <option value="" disabled selected>Anrede</option>
+                  <option value="Herr">Herr</option>
+                  <option value="Frau">Frau</option>
+                  <option value="Divers">Divers</option>
+                </select>
               </div>
 
-              <div class="form-group row">
-                <label class="col-form-label col-sm-3" for="standard_1">Vorname:</label>
-                <div class="col-sm-9"><input type="text" placeholder="Vorname" name="standard_1" id="standard_1" maxlength="255" value="<?= $standard_1 ?>" class="form-control"></div>
+              <div class="bb-form-row">
+                <input type="text" placeholder="Vorname" name="standard_1" id="standard_1" maxlength="255" value="<?= $standard_1 ?>" class="bb-input">
               </div>
 
-              <div class="form-group row">
-                <label class="col-form-label col-sm-3" for="standard_2">Nachname:</label>
-                <div class="col-sm-9"><input type="text" placeholder="Nachname" name="standard_2" id="standard_2" maxlength="255" value="<?= $standard_2 ?>" class="form-control"></div>
+              <div class="bb-form-row">
+                <input type="text" placeholder="Nachname" name="standard_2" id="standard_2" maxlength="255" value="<?= $standard_2 ?>" class="bb-input">
               </div>
 
-              <div class="form-group row">
-                <label class="col-form-label col-sm-3" for="standard_3">PLZ:</label>
-                <div class="col-sm-9"><input type="text" placeholder="PLZ" name="standard_3" id="standard_3" maxlength="255" value="<?= $standard_3 ?>" class="form-control"></div>
+              <div class="bb-form-row">
+                <input type="text" placeholder="PLZ" name="standard_3" id="standard_3" maxlength="255" value="<?= $standard_3 ?>" class="bb-input">
               </div>
 
-              <div class="form-group row">
-                <label class="col-form-label col-sm-3" for="standard_4">Ort:</label>
-                <div class="col-sm-9"><input type="text" placeholder="Ort" name="standard_4" id="standard_4" maxlength="255" value="<?= $standard_4 ?>" class="form-control"></div>
+              <div class="bb-form-row">
+                <input type="text" placeholder="Ort" name="standard_4" id="standard_4" maxlength="255" value="<?= $standard_4 ?>" class="bb-input">
+              </div>
+
+              <div class="bb-form-row consent-container">
+                <!-- consent checkbox -->
+
+                <input type="checkbox" name="consent" id="consent">
+                <label for="consent"> Ja, ich erlaube ZIPSE, mein personenbezogenes Nutzungsverhalten
+                  im Newsletter zu erfassen und auszuwerten, um die Inhalte besser auf
+                  meine persönlichen Interessen auszurichten.</label>
+
               </div>
 
               <input type="hidden" name="doiSrc" value="anmeldeseite" />
               <input type="hidden" name="doiSubscriptionPage" value="zipse" />
-              <div class="form-group row mt-2">
-                <div class="col-sm-9 offset-sm-3">
-                  <button class="btn btn-default btn-block" type="submit">Subscribe Contact</button>
-                </div>
+              <div class="bb-form-row">
+                <button class="submit-button" type="submit">Jetzt anmelden »</button>
               </div>
               <?php if (isset($response) && $response->isSuccess()) { ?>
                 <!-- redirect to ok.php -->
@@ -186,7 +194,7 @@ if (isset($_POST['email'])) {
               <?php } ?>
             </form>
           </div>
-          <div class="bb-form-item">
+          <div class="bb-form-image-container">
             <img class="form-image" src="img/voucher.png" alt="voucher">
           </div>
         </div>
@@ -198,7 +206,7 @@ if (isset($_POST['email'])) {
       <section>
         <ul class="process-list">
           <li class="process-item"><img class="process-image" src="img/process-1.png" alt="process-1">
-            <p class="process-text">Formular
+            <p class="process-text">Formular <br>
               ausfüllen</p>
           </li>
           <li class="process-item">
@@ -206,7 +214,7 @@ if (isset($_POST['email'])) {
             </div>
           </li>
           <li class="process-item opacity-50"><img class="process-image" src="img/process-2.png" alt="process-2">
-            <p class="process-text">Bestätigungs-Mail
+            <p class="process-text">Bestätigungs-Mail <br>
               erhalten</p>
           </li>
           <li class="process-item opacity-50">
@@ -214,7 +222,7 @@ if (isset($_POST['email'])) {
             </div>
           </li>
           <li class="process-item opacity-50"><img class="process-image" src="img/process-3.png" alt="process-3">
-            <p class="process-text">Klick auf
+            <p class="process-text">Klick auf <br>
               Link</p>
           </li>
           <li class="process-item opacity-50">
@@ -222,7 +230,7 @@ if (isset($_POST['email'])) {
             </div>
           </li>
           <li class="process-item opacity-50"><img class="process-image" src="img/process-4.png" alt="process-4">
-            <p class="process-text">Anmeldung
+            <p class="process-text">Anmeldung <br>
               erfolgreich</p>
           </li>
         </ul>
