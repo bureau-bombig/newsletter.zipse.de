@@ -215,7 +215,7 @@ if (isset($_POST['email'])) {
             </div>
           </li>
           <li class="process-item opacity-50"><img class="process-image" src="img/process-2.png" alt="process-2">
-            <p class="process-text">Bestätigungs-Mail <br>
+            <p class="process-text">Bestätigungs-<br>Mail
               erhalten</p>
           </li>
           <li class="process-item opacity-50">
