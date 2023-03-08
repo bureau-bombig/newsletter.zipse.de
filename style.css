@@ -104,7 +104,7 @@ a {
 
 @media screen and (max-width: 768px) {
   .nav-item {
-    padding: 7px;
+    padding: 5px;
   }
 }
 
@@ -127,6 +127,7 @@ a:hover {
   display: flex;
   flex-direction: row;
   padding: 4rem 0 2rem;
+  gap: 20px;
 }
 
 .feature-item {
