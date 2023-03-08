@@ -12,7 +12,7 @@
 <body>
     <div class="site-container">
         <?php include('./header.php'); ?>
-        <div>
+        <div class="sub-container">
             <h1> Ihre Anmeldung war erfolgreich. </h1>
             <p> Ab sofort erhalten Sie alle zwei Wochen unseren Newsletter. </p>
         </div>

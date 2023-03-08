@@ -12,7 +12,7 @@
 <body>
     <div class="site-container">
         <?php include('./header.php'); ?>
-        <div>
+        <div class="sub-container">
             <h1> Leider ist etwas schiefgelaufen. </h1>
             <p> Bitte versuchen Sie es erneut. </p>
         </div>

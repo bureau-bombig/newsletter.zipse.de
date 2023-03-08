@@ -12,9 +12,9 @@
 <body>
     <div class="site-container">
         <?php include('./header.php'); ?>
-        <div>
+        <div class="sub-container">
             <h1> Ihre Abmeldung war erfolgreich. </h1>
-            <p> Falls Sie sich erneut anmelden möchten, klicken Sie bitte hier </p>
+            <p> Falls Sie sich erneut anmelden möchten, klicken Sie bitte <a href=" /">hier</a> </p>
         </div>
         <?php include('./footer.php'); ?>
     </div>

@@ -12,7 +12,7 @@
 <body>
     <div class="site-container">
         <?php include('./header.php'); ?>
-        <div>
+        <div class="sub-container">
             <h1> Vielen Dank für Ihre Anmeldung. </h1>
             <p> Bitte klicken Sie auf den Link in der Bestätigungs-Mail. </p>
         </div>
