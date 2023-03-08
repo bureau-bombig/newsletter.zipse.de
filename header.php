@@ -16,7 +16,7 @@
                     <a title="Garten und Grillen" href="https://www.zipse.de/garten-grillen.html">Garten & Grillen</a>
                 </li>
                 <li class="nav-item">
-                    <a title="Stellenangebote" href="https://www.zipse.de/unternehmen/stellenangebote.html">Stellenangebote</a>
+                    <a title="Stellenangebote" href="https://www.zipse.de/unternehmen/stellenangebote.html">Karriere</a>
                 </li>
             </ul>
         </nav>
