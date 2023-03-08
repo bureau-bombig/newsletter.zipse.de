@@ -48,6 +48,12 @@
                 </li>
             </ul>
         </section>
+        <!-- Redirect to Home after 20 Seconds -->
+        <script>
+            setTimeout(function() {
+                window.location.href = "index.php";
+            }, 20000);
+        </script>
         <?php include('./footer.php'); ?>
     </div>
 </body>
